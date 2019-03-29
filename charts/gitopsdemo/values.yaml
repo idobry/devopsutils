@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: idobry/gitopsdemo
-  tag: latest
+  tag: version-1.0
   pullPolicy: IfNotPresent
 
 nameOverride: ""
