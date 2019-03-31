@@ -3,7 +3,7 @@ pipeline
     agent any
 
     environment {
-        BUILD_TS = ""
+        BUILD_TS = " "
     }
 
     stages
