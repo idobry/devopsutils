@@ -12,7 +12,7 @@ pipeline
         {
             steps
             {
-                echo 'step1'
+                echo '${html_url} step1'
             }
         }
         stage('step2')
