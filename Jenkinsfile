@@ -12,28 +12,28 @@ pipeline
         {
             steps
             {
-                echo step1
+                echo 'step1'
             }
         }
         stage('step2')
         {
             steps
             {
-                echo step2
+                echo 'step2'
             }
         }
         stage('step3')
         {
             steps
             {
-                echo step3
+                echo 'step3'
             }
         }
         stage('step4')
         {
             steps
             {
-                echo step4
+                echo 'step4'
             }
         }
 
