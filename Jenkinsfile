@@ -13,11 +13,12 @@ pipeline
             steps
             {
                 script{
-                    sh "echo trying to clone $clone_url"
+                    sourc
                     dir('source'){
-                        git credentialsId: 'idobry_github', url: '$clone_url'
-                    } 
-                    sh "ls -la"                   
+                        git branch: '', credentialsId: 'idobry_github', url: '$clone_url'
+                        def customImage = docker.build("idobry/gitopsdemo:${env.BUILD_ID}")
+                        customImage.push() 
+                    }                   
                 }
             }
         }
