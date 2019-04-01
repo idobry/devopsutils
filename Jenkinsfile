@@ -8,13 +8,16 @@ pipeline
 
     stages
     {
-        stage('step1')
+        stage('get source')
         {
             steps
             {
-                echo '${html_url} step1'
-                echo '$html_url step1'
-                sh "echo $html_url"
+                script{
+                    dir('source'){
+                        git credentialsId: 'github idobry/devopsutils', url: '$clone_url'
+                    } 
+                    ls -la                   
+                }
             }
         }
         stage('step2')
@@ -30,7 +33,6 @@ pipeline
             steps
             {
                 echo 'step3'
-                sh "echo $all"
             }
         }
         stage('step4')
