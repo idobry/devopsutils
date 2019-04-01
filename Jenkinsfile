@@ -16,7 +16,7 @@ pipeline
                     dir('source'){
                         git credentialsId: 'github idobry/devopsutils', url: '$clone_url'
                     } 
-                    ls -la                   
+                    sh "ls -la"                   
                 }
             }
         }
