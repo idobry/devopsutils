@@ -15,8 +15,6 @@ pipeline
                 script{
                     dir('source'){
                         def source_branch = sh(script: 'echo ${ref##*/}', returnStdout: true)
-                        //git branch: '${source_branch}', credentialsId: 'idobry_github', url: '$clone_url'
-                        sh "echo $source_branch"
                         git branch: source_branch, credentialsId: 'idobry_github', url: '$clone_url'
                         //sh "git checkout $source_branch"
                         //def customImage = docker.build("idobry/gitopsdemo:${env.BUILD_ID}", "-f ./source")
