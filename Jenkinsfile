@@ -14,10 +14,10 @@ pipeline
             {
                 script{
                     dir('source'){
-                        def source_branch = sh(script: '${ref##*/}', returnStdout: true)
+                        //def source_branch = sh(script: '${ref##*/}', returnStdout: true)
                         //git branch: '${source_branch}', credentialsId: 'idobry_github', url: '$clone_url'
                         sh "echo $clone_url"
-                        git credentialsId: 'idobry_github', url: '$clone_url'
+                        //git credentialsId: 'idobry_github', url: '$clone_url'
                         //sh "git checkout $source_branch"
                         //def customImage = docker.build("idobry/gitopsdemo:${env.BUILD_ID}", "-f ./source")
                         //customImage.push() 
