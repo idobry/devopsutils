@@ -13,7 +13,7 @@ pipeline
             steps
             {
                 echo '$html_url step1'
-                sh 'echo $html_url'
+                sh "echo $html_url"
             }
         }
         stage('step2')
@@ -21,7 +21,7 @@ pipeline
             steps
             {
                 echo 'step2'
-                sh 'echo $ref'
+                sh "echo $ref"
             }
         }
         stage('step3')
