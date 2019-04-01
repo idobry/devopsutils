@@ -21,6 +21,7 @@ pipeline
             steps
             {
                 echo 'step2'
+                sh 'echo $ref'
             }
         }
         stage('step3')
