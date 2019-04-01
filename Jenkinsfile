@@ -13,6 +13,7 @@ pipeline
             steps
             {
                 echo '${html_url} step1'
+                echo '$html_url step1'
                 sh "echo $html_url"
             }
         }
