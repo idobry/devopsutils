@@ -16,8 +16,8 @@ pipeline
                     dir('source'){
                         def source_branch = sh(script: 'echo ${ref##*/}', returnStdout: true)
                         git branch: source_branch, credentialsId: 'idobry_github', url: '$clone_url'
-                        //def customImage = docker.build("idobry/gitopsdemo")
-                        sh "sudo docker build . -t idobry/gitopsdemo"
+                        def customImage = docker.build("idobry/gitopsdemo")
+                        //sh "sudo docker build . -t idobry/gitopsdemo"
                         //def customImage = docker.build("idobry/gitopsdemo:${source_branch}-${env.BUILD_ID}", ".")
                         customImage.push() 
                     }                   
