@@ -15,10 +15,11 @@ pipeline
                 script{
                     dir('source'){
                         def source_branch = sh(script: 'echo ${ref##*/}', returnStdout: true)
+                        source_branch = source_branch.trim()
                         git branch: source_branch, credentialsId: 'idobry_github', url: '$clone_url'
                         def customImage = docker.build("idobry/gitopsdemo")
                         docker.withRegistry('https://registry-1.docker.io/v2/', 'idobry-docker-hub-credentials') {
-                            def tag = "${source_branch}.trim()-${env.BUILD_ID}"
+                            def tag = "${source_branch}-${env.BUILD_ID}"
                             customImage.push("${tag}")
                         } 
                     }                   
