@@ -13,6 +13,7 @@ pipeline
             steps
             {
                 script{
+                    sh "tryting to clone $clone_url"
                     dir('source'){
                         git credentialsId: 'idobry_github', url: '$clone_url'
                     } 
