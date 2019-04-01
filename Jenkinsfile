@@ -12,7 +12,7 @@ pipeline
         {
             steps
             {
-                echo '$html_url step1'
+                echo '${html_url} step1'
                 sh "echo $html_url"
             }
         }
@@ -29,6 +29,7 @@ pipeline
             steps
             {
                 echo 'step3'
+                sh "echo $all"
             }
         }
         stage('step4')
