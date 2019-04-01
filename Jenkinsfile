@@ -14,7 +14,7 @@ pipeline
             {
                 script{
                     dir('source'){
-                        git credentialsId: 'github idobry/devopsutils', url: '$clone_url'
+                        git credentialsId: 'idobry_github', url: '$clone_url'
                     } 
                     sh "ls -la"                   
                 }
