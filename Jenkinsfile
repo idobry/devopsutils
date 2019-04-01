@@ -18,9 +18,9 @@ pipeline
                         git branch: source_branch, credentialsId: 'idobry_github', url: '$clone_url'
                         //def customImage = docker.build("idobry/gitopsdemo")
                         //sh "sudo docker build . -t idobry/gitopsdemo"
-                        def customImage = docker.build("idobry/gitopsdemo:${source_branch}-${env.BUILD_ID}")
+                        def customImage = docker.build("idobry/gitopsdemo")
                         docker.withRegistry('https://registry-1.docker.io/v2/', 'idobry-docker-hub-credentials') {
-                            customImage.push()
+                            customImage.push('${source_branch}-${env.BUILD_ID}')
                         } 
                     }                   
                 }
