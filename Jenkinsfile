@@ -4,6 +4,7 @@ pipeline
 
     environment {
         BUILD_TS = " "
+        DEVOPSUTILS = "https://github.com/idobry/devopsutils.git"
         SOURCE_BRANCH = sh(script: 'echo ${ref##*/}', returnStdout: true).trim()
         SOURCE_NAME = "${name}"
         REGISTRY = "https://registry-1.docker.io/v2/"
@@ -46,15 +47,16 @@ pipeline
             steps
             {
                 script{
-                    sh "git checkout ${SOURCE_BRANCH}"
-                    def values = readYaml file: "${VALUES_FILE}"
-                    values.image.tag = "${SOURCE_BRANCH}-${env.BUILD_ID}"
-                    writeYaml file: "${NEW_VALUES_FILE}", data: values
-                    sh "cat ${NEW_VALUES_FILE}"
-                    sh "rm ${VALUES_FILE} && mv ${NEW_VALUES_FILE} ${VALUES_FILE}"
-                    sh "git commit -am 'update to version ${SOURCE_BRANCH}-${env.BUILD_ID}'"
+                    dir('.devopsutils'){
+                        git branch: SOURCE_BRANCH, credentialsId: 'idobry_github', url: DEVOPSUTILS
+                        def values = readYaml file: "${VALUES_FILE}"
+                        values.image.tag = "${SOURCE_BRANCH}-${env.BUILD_ID}"
+                        writeYaml file: "${NEW_VALUES_FILE}", data: values
+                        sh "cat ${NEW_VALUES_FILE}"
+                        sh "rm ${VALUES_FILE} && mv ${NEW_VALUES_FILE} ${VALUES_FILE}"
+                        sh "git commit -am 'update to version ${SOURCE_BRANCH}-${env.BUILD_ID}'"
+                    } 
                 }
-
             }
         }
         stage('step4')
