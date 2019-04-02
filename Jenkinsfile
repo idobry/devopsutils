@@ -3,9 +3,9 @@ pipeline
     agent any
 
     environment {
-        SOURCE_BRANCH = sh(returnStdout: true, script: 'echo ${ref###*/}').trim()
         BUILD_TS = " "
-        DEVOPSUTILS = "https://github.com/idobry/devopsutils.git"
+        DEVOPSUTILS = "https://github.com/idobry/devopsutils.git"    
+        SOURCE_BRANCH = sh(returnStdout: true, script: 'echo ${ref##*/}').trim()
         SOURCE_NAME = "${name}"
         REGISTRY = "https://registry-1.docker.io/v2/"
         VALUES_FILE = "charts/gitopsdemo/values.yaml"
@@ -32,14 +32,12 @@ pipeline
                 {
                     dir('source')
                     {
-                        //def source_branch = sh(script: 'echo ${ref##*/}', returnStdout: true)
-                        //source_branch = source_branch.trim()
                         git branch: SOURCE_BRANCH, credentialsId: 'idobry_github', url: '$clone_url'
                     }                   
                 }
             }
         }
-        stage('docker build + push')
+        /*stage('docker build + push')
         {
             steps
             {
@@ -75,7 +73,7 @@ pipeline
                     } 
                 }
             }
-        }
+        }*/
         stage('step4')
         {
             steps
