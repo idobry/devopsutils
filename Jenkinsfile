@@ -7,6 +7,8 @@ pipeline
         SOURCE_BRANCH = sh(script: 'echo ${ref##*/}', returnStdout: true).trim()
         SOURCE_NAME = "${name}"
         REGISTRY = "https://registry-1.docker.io/v2/"
+        VALUES_FILE = "charts/gitopsdemo/values.yaml"
+        NEW_VALUES_FILE = "charts/gitopsdemo/new_values.yaml"
     }
 
     stages
@@ -45,13 +47,12 @@ pipeline
             {
                 script{
                     sh "git checkout ${SOURCE_BRANCH}"
-                    def values = readYaml file: "charts/gitopsdemo/values.yaml"
-                    //modify
-                    values.image.tag = "b"
-                    writeYaml file: 'charts/gitopsdemo/new_values.yaml', data: values
-                    sh "cat charts/gitopsdemo/new_values.yaml"
-                    sh "rm charts/gitopsdemo/values.yaml && mv charts/gitopsdemo/new_values.yaml charts/gitopsdemo/values.yaml"
-                    sh "git add charts/gitopsdemo/values.yaml && git commit -m 'update to version ${SOURCE_BRANCH}-${env.BUILD_ID}'"
+                    def values = readYaml file: "${VALUES_FILE}"
+                    values.image.tag = "${SOURCE_BRANCH}-${env.BUILD_ID}"
+                    writeYaml file: "${NEW_VALUES_FILE}", data: values
+                    sh "cat ${NEW_VALUES_FILE}"
+                    sh "rm ${VALUES_FILE} && mv ${NEW_VALUES_FILE} ${VALUES_FILE}"
+                    sh "git commit -am 'update to version ${SOURCE_BRANCH}-${env.BUILD_ID}'"
                 }
 
             }
