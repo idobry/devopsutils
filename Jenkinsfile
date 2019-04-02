@@ -4,7 +4,7 @@ pipeline
 
     environment {
         BUILD_TS = " "
-        DEVOPSUTILS = "https://github.com/idobry/devopsutils.git"    
+        DEVOPSUTILS = "git@github.com:idobry/devopsutils.git"    
         SOURCE_BRANCH = sh(returnStdout: true, script: 'echo ${ref##*/}').trim()
         SOURCE_NAME = "${name}"
         REGISTRY = "https://registry-1.docker.io/v2/"
@@ -46,7 +46,7 @@ pipeline
                     dir('source')
                     {
                         sh "echo building image for ${SOURCE_NAME}"
-                        def customImage = docker.build("git@github.com:idobry/gitopsdemo.git")
+                        def customImage = docker.build("idobry/gitopsdemo")
                         docker.withRegistry("${REGISTRY}", 'idobry-docker-hub-credentials') 
                         {
                             customImage.push("${SOURCE_BRANCH}-${env.BUILD_ID}")
@@ -70,7 +70,7 @@ pipeline
                         writeYaml file: "${NEW_VALUES_FILE}", data: values
                         sh "cat ${NEW_VALUES_FILE}"
                         sh "rm ${VALUES_FILE} && mv ${NEW_VALUES_FILE} ${VALUES_FILE}"
-                        sh "git commit -am 'update to version ${SOURCE_BRANCH}-${env.BUILD_ID}' && git push"
+                        sh "git commit -am 'update to version ${SOURCE_BRANCH}-${env.BUILD_ID}' && git push canary"
                     } 
                 }
             }
