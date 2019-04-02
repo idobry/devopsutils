@@ -50,7 +50,7 @@ pipeline
                     values.image.tag = "b"
                     writeYaml file: 'charts/gitopsdemo/new_values.yaml', data: values
                     sh "cat charts/gitopsdemo/new_values.yaml"
-                    sh "rm values.yaml && mv new_values.yaml values.yaml"
+                    sh "rm charts/gitopsdemo/values.yaml && mv charts/gitopsdemo/new_values.yaml charts/gitopsdemo/values.yaml"
                     sh "git add charts/gitopsdemo/values.yaml && git commit -m 'update to version ${SOURCE_BRANCH}-${env.BUILD_ID}'"
                 }
 
