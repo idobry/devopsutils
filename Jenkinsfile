@@ -76,7 +76,7 @@ pipeline
 
                     dir('.devopsutils')
                     {
-                        sshagent(github-ssh-idobry) 
+                        sshagent(['github-ssh-idobry']) 
                         {
                             sh 'git clone git@github.com:idobry/devopsutils.git .'
                             sh "git checkout ${SOURCE_BRANCH}"
