@@ -63,17 +63,21 @@ pipeline
                 {
                    dir('.devopsutils')
                    {
-                        //git branch: SOURCE_BRANCH, credentialsId: 'github-agent-token', url: DEVOPSUTILS
-                        sh "git clone https://idobry:3a7a594c03da328808505127cb5ce31a6be204ff@github.com/idobry/devopsutils.git ."
-                        sh "git checkout canary"
-                        def values = readYaml file: "${VALUES_FILE}"
-                        values.image.tag = "${SOURCE_BRANCH}-${env.BUILD_ID}"
-                        writeYaml file: "${NEW_VALUES_FILE}", data: values
-                        sh "cat ${NEW_VALUES_FILE}"
-                        sh "rm ${VALUES_FILE} && mv ${NEW_VALUES_FILE} ${VALUES_FILE}"
-                        sh "git add ${VALUES_FILE}"
-                        sh "git commit -m 'update to version ${SOURCE_BRANCH}-${env.BUILD_ID}'"
-                        sh "git push"
+                        withCredentials([usernamePassword(credentialsId: 'github-agent-token2', passwordVariable: 'pass')]
+                        {
+                            //git branch: SOURCE_BRANCH, credentialsId: 'github-agent-token', url: DEVOPSUTILS
+                            sh "git clone https://idobry:${pass}@github.com/idobry/devopsutils.git ."
+                            sh "git checkout canary"
+                            def values = readYaml file: "${VALUES_FILE}"
+                            values.image.tag = "${SOURCE_BRANCH}-${env.BUILD_ID}"
+                            writeYaml file: "${NEW_VALUES_FILE}", data: values
+                            sh "cat ${NEW_VALUES_FILE}"
+                            sh "rm ${VALUES_FILE} && mv ${NEW_VALUES_FILE} ${VALUES_FILE}"
+                            sh "git add ${VALUES_FILE}"
+                            sh "git commit -m 'update to version ${SOURCE_BRANCH}-${env.BUILD_ID}'"
+                            sh "git push"
+                        }
+
                     }
                 }
             }
