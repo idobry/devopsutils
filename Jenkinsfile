@@ -63,7 +63,7 @@ pipeline
                 {
                    dir('.devopsutils')
                    {
-                        git credentialsId: 'github-agent-token', url: DEVOPSUTILS
+                        git branch: SOURCE_BRANCH, credentialsId: 'github-agent-token', url: DEVOPSUTILS
 
                         def values = readYaml file: "${VALUES_FILE}"
                         values.image.tag = "${SOURCE_BRANCH}-${env.BUILD_ID}"
