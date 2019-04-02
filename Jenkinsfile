@@ -4,7 +4,7 @@ pipeline
 
     environment {
         BUILD_TS = " "
-        DEVOPSUTILS = "git@github.com:idobry/devopsutils.git"    
+        DEVOPSUTILS = "https://github.com/idobry/devopsutils.git"    
         SOURCE_BRANCH = sh(returnStdout: true, script: 'echo ${ref##*/}').trim()
         SOURCE_NAME = "${name}"
         REGISTRY = "https://registry-1.docker.io/v2/"
@@ -61,17 +61,25 @@ pipeline
             {
                 script
                 {
+                    withCredentials([usernamePassword(credentialsId: 'idobry_github', usernameVariable: 'username', passwordVariable: 'password')]){
+                    {
+                        sh "git clone http://$username:$password@github.com/idobry/devopsutils.git .devopsutils" 
+                    }
+/*
                     dir('.devopsutils')
                     {
-                        git branch: SOURCE_BRANCH, credentialsId: 'idobry_github', url: DEVOPSUTILS
+                        //git branch: SOURCE_BRANCH, credentialsId: 'idobry_github', url: DEVOPSUTILS
                         //sh "git checkout ${SOURCE_BRANCH}"
+
+                        sh "git clone https://idobry:liad171393@github.com/idobry/devopsutils.git"
+
                         def values = readYaml file: "${VALUES_FILE}"
                         values.image.tag = "${SOURCE_BRANCH}-${env.BUILD_ID}"
                         writeYaml file: "${NEW_VALUES_FILE}", data: values
                         sh "cat ${NEW_VALUES_FILE}"
                         sh "rm ${VALUES_FILE} && mv ${NEW_VALUES_FILE} ${VALUES_FILE}"
                         sh "git commit -am 'update to version ${SOURCE_BRANCH}-${env.BUILD_ID}' && git push canary"
-                    } 
+                    } */
                 }
             }
         }
