@@ -18,7 +18,9 @@ pipeline
         {
             steps
             {
-                sh "if [ -d ".devopsutils" ]; then rm -Rf .devopsutils; fi"
+                script{
+                    sh "if [ -d ".devopsutils" ]; then rm -Rf .devopsutils; fi"
+                }                
             }
         }
         stage('get source')
