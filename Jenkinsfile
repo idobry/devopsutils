@@ -29,8 +29,8 @@ pipeline
             steps
             {
                 script{
-                    dir('docker build'){
-                        sh "echo building image for ${REGISTRY}"
+                    dir('source'){
+                        sh "echo building image for ${SOURCE_NAME}"
                         def customImage = docker.build("idobry/gitopsdemo")
                         docker.withRegistry("${REGISTRY}", 'idobry-docker-hub-credentials') {
                             customImage.push("${SOURCE_BRANCH}-${env.BUILD_ID}")
