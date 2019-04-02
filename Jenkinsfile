@@ -64,7 +64,7 @@ pipeline
                     //dir('.devopsutils')
                     //{
                         //git branch: SOURCE_BRANCH, credentialsId: 'idobry_github', url: DEVOPSUTILS
-                        sh "git checkput ${SOURCE_BRANCH}"
+                        sh "git checkout ${SOURCE_BRANCH}"
                         def values = readYaml file: "${VALUES_FILE}"
                         values.image.tag = "${SOURCE_BRANCH}-${env.BUILD_ID}"
                         writeYaml file: "${NEW_VALUES_FILE}", data: values
