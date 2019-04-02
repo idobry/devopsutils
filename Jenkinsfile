@@ -19,7 +19,7 @@ pipeline
             steps
             {
                 script{
-                    sh "if [ -d ".devopsutils" ]; then rm -Rf .devopsutils; fi"
+                    sh "if [ -d '.devopsutils' ]; then rm -Rf .devopsutils; fi"
                 }                
             }
         }
