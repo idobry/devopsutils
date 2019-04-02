@@ -77,6 +77,8 @@ pipeline
                    dir('.devopsutils')
                    {
                         //sh 'git clone git@github.com:idobry/devopsutils.git .'
+                        sh "git config --global user.name idobry"
+                        sh "git config --global user.password liad171393"
                         sh "git clone ${DEVOPSUTILS} ."
                         sh "git checkout master"
                         sh "git checkout ${SOURCE_BRANCH}"
