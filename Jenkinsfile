@@ -37,7 +37,7 @@ pipeline
                 }
             }
         }
-        /*stage('docker build + push')
+        stage('docker build + push')
         {
             steps
             {
@@ -55,7 +55,7 @@ pipeline
                 }
             }
         }
-        stage('update chart')
+        /*stage('update chart')
         {
             steps
             {
