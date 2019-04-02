@@ -3,6 +3,7 @@ pipeline
     agent any
 
     environment {
+        SOURCE_BRANCH = sh(returnStdout: true, script: 'echo ${ref###*/}').trim()
         BUILD_TS = " "
         DEVOPSUTILS = "https://github.com/idobry/devopsutils.git"
         SOURCE_NAME = "${name}"
