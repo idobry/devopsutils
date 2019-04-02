@@ -78,9 +78,8 @@ pipeline
                    {
                         //sh 'git clone git@github.com:idobry/devopsutils.git .'
                         sh "git config --global user.name idobry"
-                        sh "git config --global user.password liad171393"
+                        sh "git config --global user.password '782ce69a38c9a174153a3054e173d4dec832cca8'"
                         sh "git clone ${DEVOPSUTILS} ."
-                        sh "git checkout master"
                         sh "git checkout ${SOURCE_BRANCH}"
 
                         def values = readYaml file: "${VALUES_FILE}"
