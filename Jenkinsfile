@@ -14,6 +14,13 @@ pipeline
 
     stages
     {
+        stage('cleanup')
+        {
+            steps
+            {
+                sh "if [ -d ".devopsutils" ]; then rm -Rf .devopsutils; fi"
+            }
+        }
         stage('get source')
         {
             steps
