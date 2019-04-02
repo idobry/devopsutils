@@ -63,7 +63,7 @@ pipeline
                 {
                    dir('.devopsutils')
                    {
-                         withCredentials([usernamePassword(credentialsId: 'github-agent-token2', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                         withCredentials([usernamePassword(credentialsId: 'github-agent-token2', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')])
                         {
                             //git branch: SOURCE_BRANCH, credentialsId: 'github-agent-token', url: DEVOPSUTILS
                             sh "git clone https://$USERNAME:$PASSWORD@github.com/idobry/devopsutils.git ."
