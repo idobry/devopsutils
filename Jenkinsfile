@@ -4,6 +4,9 @@ pipeline
 
     environment {
         BUILD_TS = " "
+        SOURCE_BRANCH = sh(script: 'echo ${ref##*/}', returnStdout: true).trim()
+        SOURCE_NAME = "${name}"
+        REGISTRY = "https://registry-1.docker.io/v2/"
     }
 
     stages
@@ -14,24 +17,26 @@ pipeline
             {
                 script{
                     dir('source'){
-                        def source_branch = sh(script: 'echo ${ref##*/}', returnStdout: true)
-                        source_branch = source_branch.trim()
-                        git branch: source_branch, credentialsId: 'idobry_github', url: '$clone_url'
-                        def customImage = docker.build("idobry/gitopsdemo")
-                        docker.withRegistry('https://registry-1.docker.io/v2/', 'idobry-docker-hub-credentials') {
-                            def tag = "${source_branch}-${env.BUILD_ID}"
-                            customImage.push("${tag}")
-                        } 
+                        //def source_branch = sh(script: 'echo ${ref##*/}', returnStdout: true)
+                        //source_branch = source_branch.trim()
+                        git branch: SOURCE_BRANCH, credentialsId: 'idobry_github', url: '$clone_url'
                     }                   
                 }
             }
         }
-        stage('step2')
+        stage('docker build + push')
         {
             steps
             {
-                echo 'step2'
-                sh "echo $ref"
+                script{
+                    dir('docker build'){
+                        sh "echo building image for ${REGISTRY}"
+                        def customImage = docker.build("idobry/gitopsdemo")
+                        docker.withRegistry("${REGISTRY}", 'idobry-docker-hub-credentials') {
+                            customImage.push("${SOURCE_BRANCH}-${env.BUILD_ID}")
+                        } 
+                    }                   
+                }
             }
         }
         stage('step3')
