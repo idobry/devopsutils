@@ -45,10 +45,10 @@ pipeline
             {
                 script{
                     sh "git checkout ${SOURCE_BRANCH}"
-                    values = readYaml file: "charts/gitopsdemo/values.yaml"
+                    def values = readYaml file: "charts/gitopsdemo/values.yaml"
                     //modify
-                    mydata.image.tag = "b"
-                    writeYaml file: 'charts/gitopsdemo/values.yaml', data: mydata
+                    values.image.tag = "b"
+                    writeYaml file: 'charts/gitopsdemo/values.yaml', data: values
                     sh "cat charts/gitopsdemo/values.yaml"
                     sh "git add charts/gitopsdemo/values.yaml && git commit -m 'update to version ${SOURCE_BRANCH}-${env.BUILD_ID}'"
                 }
