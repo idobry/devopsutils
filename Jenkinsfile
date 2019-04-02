@@ -63,7 +63,7 @@ pipeline
                 {
                    dir('.devopsutils')
                    {
-                        withCredentials([usernamePassword(credentialsId: 'github-agent-token2', passwordVariable: 'pass')]
+                        withCredentials([usernamePassword(credentialsId: 'github-agent-token2', passwordVariable: 'pass')])
                         {
                             //git branch: SOURCE_BRANCH, credentialsId: 'github-agent-token', url: DEVOPSUTILS
                             sh "git clone https://idobry:${pass}@github.com/idobry/devopsutils.git ."
@@ -77,8 +77,7 @@ pipeline
                             sh "git commit -m 'update to version ${SOURCE_BRANCH}-${env.BUILD_ID}'"
                             sh "git push"
                         }
-
-                    }
+                   }
                 }
             }
         }
