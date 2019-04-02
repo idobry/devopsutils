@@ -61,7 +61,7 @@ pipeline
             {
                 script
                 {
-                    withCredentials([usernamePassword(credentialsId: 'idobry_github', usernameVariable: 'username', passwordVariable: 'password')])
+                    /*withCredentials([usernamePassword(credentialsId: 'idobry_github', usernameVariable: 'username', passwordVariable: 'password')])
                     {
                         sh "git clone git@github.com:idobry/devopsutils.git .devopsutils" 
                         sh "cd .devopsutils && git checkout ${SOURCE_BRANCH}"
@@ -72,7 +72,7 @@ pipeline
                         sh "rm ${VALUES_FILE} && mv ${NEW_VALUES_FILE} ${VALUES_FILE}"
                         sh "git commit -am 'update to version ${SOURCE_BRANCH}-${env.BUILD_ID}' && git push"
                     }
-/*
+                    */
                     //dir('.devopsutils')
                     //{
                         //git branch: SOURCE_BRANCH, credentialsId: 'idobry_github', url: DEVOPSUTILS
