@@ -65,7 +65,7 @@ pipeline
                    {
                         //git branch: SOURCE_BRANCH, credentialsId: 'github-agent-token', url: DEVOPSUTILS
                         sh "git clone https://idobry:782ce69a38c9a174153a3054e173d4dec832cca8@github.com/idobry/devopsutils.git ."
-                        git checkout canary 
+                        sh "git checkout canary"
                         def values = readYaml file: "${VALUES_FILE}"
                         values.image.tag = "${SOURCE_BRANCH}-${env.BUILD_ID}"
                         writeYaml file: "${NEW_VALUES_FILE}", data: values
