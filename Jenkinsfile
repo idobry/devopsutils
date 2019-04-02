@@ -39,11 +39,17 @@ pipeline
                 }
             }
         }
-        stage('step3')
+        stage('update chart')
         {
             steps
             {
-                echo 'step3'
+                sh "git checkout ${SOURCE_BRANCH}"
+                values = readYaml file: "charts/gitopsdemo/values.yaml"
+                //modify
+                mydata.image.tag = "b"
+                writeYaml file: 'charts/gitopsdemo/values.yaml', data: mydata
+                sh "cat charts/gitopsdemo/values.yaml"
+                sh "git add charts/gitopsdemo/values.yaml && git commit -m 'update to version ${SOURCE_BRANCH}-${env.BUILD_ID}'"
             }
         }
         stage('step4')
