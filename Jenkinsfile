@@ -64,7 +64,7 @@ pipeline
                     withCredentials([usernamePassword(credentialsId: 'idobry_github', usernameVariable: 'username', passwordVariable: 'password')])
                     {
                         sh "git clone http://$username:$password@github.com/idobry/devopsutils.git .devopsutils" 
-                        sh "cd .devopsutils git checkout ${SOURCE_BRANCH}"
+                        sh "cd .devopsutils && git checkout ${SOURCE_BRANCH}"
                         def values = readYaml file: "${VALUES_FILE}"
                         values.image.tag = "${SOURCE_BRANCH}-${env.BUILD_ID}"
                         writeYaml file: "${NEW_VALUES_FILE}", data: values
