@@ -61,7 +61,7 @@ pipeline
             {
                 script
                 {
-                    withCredentials([usernamePassword(credentialsId: 'idobry_github', usernameVariable: 'username', passwordVariable: 'password')]){
+                    withCredentials([usernamePassword(credentialsId: 'idobry_github', usernameVariable: 'username', passwordVariable: 'password')])
                     {
                         sh "git clone http://$username:$password@github.com/idobry/devopsutils.git .devopsutils" 
                     }
