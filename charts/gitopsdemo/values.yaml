@@ -5,8 +5,6 @@ pipeline
     environment {
         BUILD_TS = " "
         DEVOPSUTILS = "https://github.com/idobry/devopsutils.git"
-        SOURCE_BRANCH = sh(returnStdout: true, script: 'echo ${ref###*/}').trim()
-        SOURCE_BRANcCH = sh(returnStdout: true, script: 'echo ${ref###*/}').trim()
         SOURCE_NAME = "${name}"
         REGISTRY = "https://registry-1.docker.io/v2/"
         VALUES_FILE = "charts/gitopsdemo/values.yaml"
