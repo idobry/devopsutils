@@ -63,7 +63,6 @@ pipeline
             {
                 script
                 {
-                    SOURCE_BRANCH = sh(returnStdout: true, script: 'echo ${ref###*/}').trim()
                     dir('.devopsutils')
                     {
                         git branch: SOURCE_BRANCH, credentialsId: 'idobry_github', url: DEVOPSUTILS
