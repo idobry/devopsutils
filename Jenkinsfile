@@ -73,23 +73,21 @@ pipeline
                                 sh "git clone https://$USERNAME:$PASSWORD@$DEVOPSUTILS ."
                                 sh "git checkout $SOURCE_BRANCH"
                             }
-                            parallel{
-                                stage('edit value.yaml file'){
-                                    def values = readYaml file: "${VALUES_FILE}"
-                                    values.image.tag = "${SOURCE_BRANCH}-${COMMIT}-${env.BUILD_ID}"
-                                    writeYaml file: "${NEW_VALUES_FILE}", data: values
-                                    sh "rm ${VALUES_FILE} && mv ${NEW_VALUES_FILE} ${VALUES_FILE}"
-                                    sh "git add ${VALUES_FILE}"
-                                }
-                                stage('edit Chart.yaml file'){
-                                    def chart = readYaml file: "${CHART_FILE}"
-                                    def old_chart_version = chart.version
-                                    chart.version = updateVersion(old_chart_version)
-                                    writeYaml file: "${NEW_CHART_FILE}", data: chart
-                                    sh "rm ${CHART_FILE} && mv ${NEW_CHART_FILE} ${CHART_FILE}"
-                                    sh "git add ${CHART_FILE}"
-                                } 
+                            stage('edit value.yaml file'){
+                                def values = readYaml file: "${VALUES_FILE}"
+                                values.image.tag = "${SOURCE_BRANCH}-${COMMIT}-${env.BUILD_ID}"
+                                writeYaml file: "${NEW_VALUES_FILE}", data: values
+                                sh "rm ${VALUES_FILE} && mv ${NEW_VALUES_FILE} ${VALUES_FILE}"
+                                sh "git add ${VALUES_FILE}"
                             }
+                            stage('edit Chart.yaml file'){
+                                def chart = readYaml file: "${CHART_FILE}"
+                                def old_chart_version = chart.version
+                                chart.version = updateVersion(old_chart_version)
+                                writeYaml file: "${NEW_CHART_FILE}", data: chart
+                                sh "rm ${CHART_FILE} && mv ${NEW_CHART_FILE} ${CHART_FILE}"
+                                sh "git add ${CHART_FILE}"
+                            } 
                             stage('commit and push'){
                                 sh "git commit -m 'update to version ${SOURCE_BRANCH}-${COMMIT}-${env.BUILD_ID}'"
                                 sh "git push"
