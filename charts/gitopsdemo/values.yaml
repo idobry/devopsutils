@@ -2,7 +2,7 @@ replicaCount: 1
 environment: canary
 image:
   repository: idobry/gitopsdemo
-  tag: canary-08c1e-151
+  tag: canary-08c1e-153
   pullPolicy: Always
 nameOverride: ''
 fullnameOverride: ''
