@@ -80,7 +80,7 @@ pipeline
                                 sh "rm ${VALUES_FILE} && mv ${NEW_VALUES_FILE} ${VALUES_FILE}"
                                 sh "git add ${VALUES_FILE}"
                             }
-                            if (SOURCE_BRANCH != "stage" && SOURCE_BRANCH != "canary" && SOURCE_BRANCH != "master"){
+                            if (SOURCE_BRANCH != "stage"){
                                 stage('edit Chart.yaml file'){
                                     def chart = readYaml file: "${CHART_FILE}"
                                     def old_chart_version = chart.version
