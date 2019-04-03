@@ -11,8 +11,8 @@ pipeline
         REGISTRY = "https://registry-1.docker.io/v2/"
         VALUES_FILE = "charts/gitopsdemo/values.yaml"
         CHART_FILE = "charts/gitopsdemo/Chart.yaml"
-        NEW_VALUES_FILE = "charts/gitopsdemo/new_chart.yaml"
-        NEW_CHART_FILE = "charts/gitopsdemo/new_values.yaml"
+        NEW_VALUES_FILE = "charts/gitopsdemo/new_values.yaml"
+        NEW_CHART_FILE = "charts/gitopsdemo/new_chart.yaml"
         TAG = "${SOURCE_BRANCH}-${COMMIT}-${env.BUILD_ID}"
     }
 
