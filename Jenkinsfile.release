@@ -39,9 +39,9 @@ pipeline
                             stage('clone devopsutils'){
                                 sh "git clone https://$USERNAME:$PASSWORD@$DEVOPSUTILS ."
                                 def base_branch = ""
-                                if($SOURCE_BRANCH == "canary"){
+                                if(SOURCE_BRANCH == "canary"){
                                     sh "git checkout $base_branch"
-                                } else if($SOURCE_BRANCH == "master"){
+                                } else if(SOURCE_BRANCH == "master"){
                                     sh "git checkout $base_branch"
                                 }                                
                                 def base_values = readYaml file: "${VALUES_FILE}"
