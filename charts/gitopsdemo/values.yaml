@@ -2,7 +2,7 @@ replicaCount: 1
 environment: production
 image:
   repository: idobry/gitopsdemo
-  tag: master-147
+  tag: master-84cbe-152
   pullPolicy: Always
 nameOverride: ''
 fullnameOverride: ''
