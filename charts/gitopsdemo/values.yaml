@@ -1,5 +1,5 @@
 replicaCount: 1
-environment: production
+environment: develop
 image:
   repository: idobry/gitopsdemo
   tag: develop-0e901-162
