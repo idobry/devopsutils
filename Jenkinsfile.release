@@ -52,9 +52,10 @@ pipeline
                                         error("ERROR: release with branch $SOURCE_BRANCH")
                                     }                               
                                     base_values = readYaml file: "${VALUES_FILE}"
+                                    sh "git checkout $SOURCE_BRANCH" 
                                     writeYaml file: "${NEW_VALUES_FILE}", data: base_values
                                     sh "rm ${VALUES_FILE} && mv ${NEW_VALUES_FILE} ${VALUES_FILE}"
-                                    sh "git add ${VALUES_FILE}"
+            
                                 }
                             }
                             stage('edit Chart.yaml file'){
