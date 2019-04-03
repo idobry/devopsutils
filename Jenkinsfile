@@ -100,8 +100,15 @@ pipeline
     }
 }
 
+//Groovy Helper Methods
+
+@NonCPS
 def updateVersion(String currentVersion){
     def split = currentVersion.split('\\.')
     split[2]=++Integer.parseInt(split[2])
     return split.join('.')
+}
+
+def msgToSlack(msg){
+    slackSend color: '#287c28', message: msg
 }
