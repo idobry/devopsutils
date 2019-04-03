@@ -1,8 +1,8 @@
 replicaCount: 1
-environment: canary
+environment: stage
 image:
   repository: idobry/gitopsdemo
-  tag: canary-08c1e-155
+  tag: stage-fe11b-168
   pullPolicy: Always
 nameOverride: ''
 fullnameOverride: ''
