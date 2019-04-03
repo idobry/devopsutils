@@ -1,5 +1,5 @@
 replicaCount: 1
-environment: develop
+environment: stage
 image:
   repository: idobry/gitopsdemo
   tag: stage-fe11b-168
