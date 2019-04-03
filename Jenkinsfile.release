@@ -5,15 +5,11 @@ pipeline
     environment {
         BUILD_TS = " "
         DEVOPSUTILS = "github.com/idobry/devopsutils.git"    
-        SOURCE_BRANCH = sh(returnStdout: true, script: 'echo ${ref##*/}').trim()
+        SOURCE_BRANCH = "${target_commitish}"
         SOURCE_NAME = "${name}"
-        COMMIT = "${commit}".getAt(0..4)
         REGISTRY = "https://registry-1.docker.io/v2/"
-        VALUES_FILE = "charts/gitopsdemo/values.yaml"
         CHART_FILE = "charts/gitopsdemo/Chart.yaml"
         NEW_VALUES_FILE = "charts/gitopsdemo/new_chart.yaml"
-        NEW_CHART_FILE = "charts/gitopsdemo/new_values.yaml"
-        TAG = "${SOURCE_BRANCH}-${COMMIT}-${env.BUILD_ID}"
     }
 
     stages
@@ -44,14 +40,13 @@ pipeline
                             }
                             stage('edit Chart.yaml file'){
                                 def chart = readYaml file: "${CHART_FILE}"
-                                def old_chart_version = chart.version
-                                chart.version = updateVersion(old_chart_version)
+                                chart.version = "${tag_name}"
                                 writeYaml file: "${NEW_CHART_FILE}", data: chart
                                 sh "rm ${CHART_FILE} && mv ${NEW_CHART_FILE} ${CHART_FILE}"
                                 sh "git add ${CHART_FILE}"
                             }
                             stage('commit and push'){
-                                sh "git commit -m 'update to version ${SOURCE_BRANCH}-${COMMIT}-${env.BUILD_ID}'"
+                                sh "git commit -m 'update to chart version ${tag_name}'"
                                 sh "git push"
                             }
                         }
