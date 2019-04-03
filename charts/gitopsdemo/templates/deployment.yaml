@@ -25,12 +25,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
           - name: ENV
-            values: {{ .Values.environment | upper }} 
-          #|-
-        #{{- range .Values.env $key, $value := . }}
-        #  - name: {{ .key }}
-        #    values: {{ .value }}
-        #{{- end }}
+            value: {{ .Values.environment }} 
           ports:
             - name: http
               containerPort: 8080
