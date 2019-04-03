@@ -7,7 +7,7 @@ pipeline
         DEVOPSUTILS = "github.com/idobry/devopsutils.git"    
         SOURCE_BRANCH = sh(returnStdout: true, script: 'echo ${ref##*/}').trim()
         SOURCE_NAME = "${name}"
-        COMMIT = "${commit}".getAt(0..4)
+        COMMIT = "${commit}".getAt(0..6)
         REGISTRY = "https://registry-1.docker.io/v2/"
         VALUES_FILE = "charts/gitopsdemo/values.yaml"
         CHART_FILE = "charts/gitopsdemo/Chart.yaml"
