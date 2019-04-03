@@ -13,6 +13,9 @@ pipeline
         VALUES_FILE = "charts/gitopsdemo/values.yaml"
         NEW_VALUES_FILE = "charts/gitopsdemo/new_values.yaml"
     }
+    parameters {
+            string(name: 'base_values', defaultValue: '')
+    }
 
     stages
     {
@@ -38,22 +41,28 @@ pipeline
                         {
                             stage('clone devopsutils'){
                                 sh "git clone https://$USERNAME:$PASSWORD@$DEVOPSUTILS ."
-                                def base_branch = ""
-                                if(SOURCE_BRANCH == "canary"){
-                                    sh "git checkout stage"
-                                } else if(SOURCE_BRANCH == "master"){
-                                    sh "git checkout canary"
-                                }                                
-                                def base_values = readYaml file: "${VALUES_FILE}"
-                                sh "git checkout $SOURCE_BRANCH"
-                                
                             }
                             stage('edit value.yaml file'){
-                                writeYaml file: "${NEW_VALUES_FILE}", data: base_values
-                                sh "rm ${VALUES_FILE} && mv ${NEW_VALUES_FILE} ${VALUES_FILE}"
-                                sh "git add ${VALUES_FILE}"
+                                when {
+                                  expression { SOURCE_BRANCH != 'stage' }
+                                }
+                                steps{
+                                    if(SOURCE_BRANCH == "canary"){
+                                        sh "git checkout stage"
+                                    } else if(SOURCE_BRANCH == "master"){
+                                        sh "git checkout canary"
+                                    } else{
+                                        error("ERROR: release with branch $SOURCE_BRANCH")
+                                    }                               
+                                    base_values = readYaml file: "${VALUES_FILE}"
+                                    sh "git checkout $SOURCE_BRANCH" 
+                                    writeYaml file: "${NEW_VALUES_FILE}", data: base_values
+                                    sh "rm ${VALUES_FILE} && mv ${NEW_VALUES_FILE} ${VALUES_FILE}"
+                                    sh "git add ${VALUES_FILE}"
+                                }
                             }
                             stage('edit Chart.yaml file'){
+                                sh "git checkout $SOURCE_BRANCH" 
                                 def chart = readYaml file: "${CHART_FILE}"
                                 chart.version = "${tag_name}"
                                 writeYaml file: "${NEW_CHART_FILE}", data: chart
