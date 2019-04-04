@@ -1,0 +1,15 @@
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: canary-gitopsdemo
+  namespace: canary-gitopsdemo
+  annotations:
+    flux.weave.works/automated: "true"
+spec:
+  releaseName: canary-gitopsdemo
+  chart:
+    git: git@github.com:idobry/devopsutils.git
+    path: charts/gitopsdemo
+    ref: canary
+  values:
+    environment: canary_from_git
