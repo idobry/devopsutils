@@ -51,9 +51,13 @@ pipeline
                     {
                         sh "echo building image for ${SOURCE_NAME}"
                         def customImage = docker.build("idobry/gitopsdemo")
+                        def tag = "${SOURCE_BRANCH}-${COMMIT}-${env.BUILD_ID}"
+                        if(SOURCE_BRANCH == stage){
+                            TAG = "prod-${COMMIT}-${env.BUILD_ID}"
+                        }
                         docker.withRegistry("${REGISTRY}", 'idobry-docker-hub-credentials') 
                         {
-                            customImage.push("${SOURCE_BRANCH}-${COMMIT}-${env.BUILD_ID}")
+                            customImage.push("${TAG}")
                         } 
                     }                   
                 }
@@ -75,7 +79,7 @@ pipeline
                             }
                             stage('edit value.yaml file'){
                                 def values = readYaml file: "${VALUES_FILE}"
-                                values.image.tag = "${SOURCE_BRANCH}-${COMMIT}-${env.BUILD_ID}"
+                                values.image.tag = "${TAG}"
                                 writeYaml file: "${NEW_VALUES_FILE}", data: values
                                 sh "rm ${VALUES_FILE} && mv ${NEW_VALUES_FILE} ${VALUES_FILE}"
                                 sh "git add ${VALUES_FILE}"
@@ -91,7 +95,7 @@ pipeline
                                 }
                             }
                             stage('commit and push'){
-                                sh "git commit -m 'update to version ${SOURCE_BRANCH}-${COMMIT}-${env.BUILD_ID}'"
+                                sh "git commit -m 'update to version ${TAG}'"
                                 sh "git push"
                             }
                         }
