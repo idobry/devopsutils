@@ -61,13 +61,13 @@ pipeline
                             stage('edit Chart.yaml file'){
                                 sh "git checkout $SOURCE_BRANCH" 
                                 def chart = readYaml file: "${CHART_FILE}"
-                                chart.version = "${tag_name}"
+                                chart.appVersion = "${tag_name}"
                                 writeYaml file: "${NEW_CHART_FILE}", data: chart
                                 sh "rm ${CHART_FILE} && mv ${NEW_CHART_FILE} ${CHART_FILE}"
                                 sh "git add ${CHART_FILE}"
                             }
                             stage('commit and push'){
-                                sh "git commit -m 'update to chart version ${tag_name}'"
+                                sh "git commit -m 'update to appVersion in Chart.yaml to ${tag_name}'"
                                 sh "git push"
                             }
                         }
