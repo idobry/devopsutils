@@ -2,7 +2,7 @@ replicaCount: 1
 environment: develop
 image:
   repository: idobry/gitopsdemo
-  tag: develop-3efbe7d-181
+  tag: develop-02c9c99-185
   pullPolicy: Always
 nameOverride: ''
 fullnameOverride: ''
