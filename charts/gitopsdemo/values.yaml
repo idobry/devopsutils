@@ -2,7 +2,7 @@ replicaCount: 1
 environment: stage
 image:
   repository: idobry/gitopsdemo
-  tag: stage-4b671a2-176
+  tag: stage-7b1a398-182
   pullPolicy: Always
 nameOverride: ''
 fullnameOverride: ''
