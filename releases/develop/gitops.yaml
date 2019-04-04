@@ -13,5 +13,4 @@ spec:
     path: charts/gitopsdemo
     ref: develop
   value:
-    image: idobry/gitopsdemo
-    tag: develop-02c9c99-185
+    image: idobry/gitopsdemo:develop-3538ce5-192
