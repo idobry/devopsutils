@@ -52,7 +52,7 @@ pipeline
                         sh "echo building image for ${SOURCE_NAME}"
                         def customImage = docker.build("idobry/gitopsdemo")
                         def tag = "${SOURCE_BRANCH}-${COMMIT}-${env.BUILD_ID}"
-                        if(SOURCE_BRANCH == stage){
+                        if(SOURCE_BRANCH == "stage"){
                             TAG = "prod-${COMMIT}-${env.BUILD_ID}"
                         }
                         docker.withRegistry("${REGISTRY}", 'idobry-docker-hub-credentials') 
