@@ -12,3 +12,6 @@ spec:
     git: git@github.com:idobry/devopsutils.git
     path: charts/gitopsdemo
     ref: develop
+  value:
+    image: idobry/gitopsdemo
+    tag: develop-02c9c99-185
