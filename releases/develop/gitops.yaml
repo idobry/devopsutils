@@ -1,0 +1,14 @@
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: develop-gitopsdemo
+  namespace: develop-gitopsdemo
+  annotations:
+    flux.weave.works/automated: "true"
+    flux.weave.works/tag.chart-image: glob:develop-*
+spec:
+  releaseName: develop-gitopsdemo
+  chart:
+    git: git@github.com:idobry/devopsutils.git
+    path: charts/gitopsdemo
+    ref: develop
