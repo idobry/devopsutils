@@ -1,7 +1,7 @@
 replicaCount: 1
 environment: develop
 image: idobry/gitopsdemo:develop-02c9c99-185
-  pullPolicy: Always
+pullPolicy: Always
 nameOverride: ''
 fullnameOverride: ''
 service:
