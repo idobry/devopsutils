@@ -1,0 +1,16 @@
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: e2e-gitopsdemo
+  namespace: e2e-gitopsdemo
+  annotations:
+    flux.weave.works/automated: "true"
+    flux.weave.works/tag.chart-image: glob:e2e-*
+spec:
+  releaseName: develop-gitopsdemo
+  chart:
+    git: git@github.com:idobry/devopsutils.git
+    path: charts/gitopsdemo
+    ref: master
+  value:
+    image: idobry/gitopsdemo:e2e-3538ce5-192
