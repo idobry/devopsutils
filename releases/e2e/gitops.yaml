@@ -14,4 +14,4 @@ spec:
     ref: master
   value:
     image: idobry/gitopsdemo:e2e-e4c2872-194
-    enviuronment: e2e
+    environment: e2e
