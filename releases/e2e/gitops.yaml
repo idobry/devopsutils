@@ -13,4 +13,4 @@ spec:
     path: charts/gitopsdemo
     ref: master
   value:
-    image: idobry/gitopsdemo:e2e-gitopsdemo
+    image: idobry/gitopsdemo:e2e-e4c2872-194
