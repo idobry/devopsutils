@@ -12,6 +12,6 @@ spec:
     git: git@github.com:idobry/devopsutils.git
     path: charts/gitopsdemo
     ref: master
-  value:
+  values:
     image: idobry/gitopsdemo:e2e-e4c2872-194
     environment: e2e
