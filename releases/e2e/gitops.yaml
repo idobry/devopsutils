@@ -1,3 +1,4 @@
+---
 apiVersion: flux.weave.works/v1beta1
 kind: HelmRelease
 metadata:
@@ -13,5 +14,5 @@ spec:
     path: charts/gitopsdemo
     ref: master
   values:
-    image: idobry/gitopsdemo:e2e-e4c2872-194
+    image: idobry/gitopsdemo:e2e-4497de0-195
     environment: e2e
