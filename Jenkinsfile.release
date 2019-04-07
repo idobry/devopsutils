@@ -31,12 +31,11 @@ pipeline
         }
         stage('update chart')
         {
-
-            if( SOURCE_BRANCH ==~ /(prod|master)/ )
+            steps
             {
-                steps
+                script
                 {
-                    script
+                    if( SOURCE_BRANCH ==~ /(prod|master)/ )
                     {
                        dir('.devopsutils')
                        {
