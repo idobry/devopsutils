@@ -11,5 +11,3 @@ spec:
     git: git@github.com:idobry/devopsutils.git
     path: charts/gitopsdemo
     ref: master
-  values:
-    environment: prod
