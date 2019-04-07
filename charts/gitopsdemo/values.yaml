@@ -6,6 +6,7 @@ nameOverride: ''
 fullnameOverride: ''
 service:
   type: ClusterIP
+  nodePort: 30000
   port: 80
 ingress:
   enabled: false
