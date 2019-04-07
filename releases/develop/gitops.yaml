@@ -12,5 +12,6 @@ spec:
     git: git@github.com:idobry/devopsutils.git
     path: charts/gitopsdemo
     ref: develop
-  value:
+  values:
     image: idobry/gitopsdemo:develop-3538ce5-192
+    environment: develop
