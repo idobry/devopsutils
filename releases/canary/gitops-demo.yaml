@@ -13,6 +13,7 @@ spec:
     path: charts/gitopsdemo
     ref: master
   values:
+    image: idobry/gitopsdemo:develop-285cbe3-199
     environment: canary
     service:
       nodePort: 30003
