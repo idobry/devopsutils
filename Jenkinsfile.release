@@ -31,9 +31,10 @@ pipeline
         }
         stage('update chart')
         {
-            steps
+
+            if( SOURCE_BRANCH ==~ /(prod|master)/ )
             {
-                if( SOURCE_BRANCH ==~ /(prod|master)/ )
+                steps
                 {
                     script
                     {
