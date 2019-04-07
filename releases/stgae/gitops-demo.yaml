@@ -1,0 +1,15 @@
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: stage-gitopsdemo
+  namespace: stage-gitopsdemo
+  annotations:
+    flux.weave.works/automated: "true"
+spec:
+  releaseName: stage-gitopsdemo
+  chart:
+    git: git@github.com:idobry/devopsutils.git
+    path: charts/gitopsdemo
+    ref: master
+  values:
+    environment: stage
