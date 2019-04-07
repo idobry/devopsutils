@@ -16,3 +16,4 @@ spec:
   values:
     image: idobry/gitopsdemo:e2e-4497de0-195
     environment: e2e
+    nodePort: 30004
