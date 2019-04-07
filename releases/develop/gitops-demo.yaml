@@ -14,7 +14,7 @@ spec:
     path: charts/gitopsdemo
     ref: master
   values:
-    image: idobry/gitopsdemo:develop-02c9c99-185
+    image: idobry/gitopsdemo:develop-5576a12-196
     environment: develop
     service:
       nodePort: 30001
