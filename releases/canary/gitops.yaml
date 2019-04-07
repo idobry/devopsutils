@@ -10,6 +10,6 @@ spec:
   chart:
     git: git@github.com:idobry/devopsutils.git
     path: charts/gitopsdemo
-    ref: canary
+    ref: master
   values:
     environment: canary
