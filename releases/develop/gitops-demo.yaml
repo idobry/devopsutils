@@ -16,3 +16,4 @@ spec:
   values:
     image: idobry/gitopsdemo:develop-02c9c99-185
     environment: develop
+    nodePort: 30001
