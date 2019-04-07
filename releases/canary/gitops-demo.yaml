@@ -13,3 +13,4 @@ spec:
     ref: master
   values:
     environment: canary
+    nodePort: 30003
