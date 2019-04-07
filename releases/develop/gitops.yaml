@@ -12,7 +12,7 @@ spec:
   chart:
     git: git@github.com:idobry/devopsutils.git
     path: charts/gitopsdemo
-    ref: develop
+    ref: master
   values:
     image: idobry/gitopsdemo:develop-02c9c99-185
     environment: develop
