@@ -5,6 +5,7 @@ metadata:
   namespace: prod-gitopsdemo
   annotations:
     flux.weave.works/automated: "true"
+    flux.weave.works/tag.chart-image: glob:prod-*
 spec:
   releaseName: prod-gitopsdemo
   chart:

@@ -5,6 +5,7 @@ metadata:
   namespace: canary-gitopsdemo
   annotations:
     flux.weave.works/automated: "true"
+    flux.weave.works/tag.chart-image: glob:canary-*
 spec:
   releaseName: canary-gitopsdemo
   chart:
