@@ -34,8 +34,7 @@ pipeline
             steps
             {
                 when {
-                    expression { SOURCE_BRANCH ==~ "prod" }
-                    //expression { SOURCE_BRANCH ==~ /(prod|canary)/ }
+                    expression { SOURCE_BRANCH ==~ /(prod|master)/ }
                 }
                 script
                 {
