@@ -2,32 +2,17 @@ pipeline
 {
     agent any
 
-    environment {
-        BUILD_TS = " "
-        DEVOPSUTILS = "github.com/idobry/devopsutils.git"    
+    environment {   
         SOURCE_BRANCH = sh(returnStdout: true, script: 'echo ${ref##*/}').trim()
-        SOURCE_NAME = "${name}"
+        SOURCE_NAME = "${name}".toLowerCase()
+        SOURCE_URL = "${clone_url}"
         COMMIT = "${commit}".getAt(0..6)
         REGISTRY = "https://registry-1.docker.io/v2/"
-        VALUES_FILE = "charts/gitopsdemo/values.yaml"
-        CHART_FILE = "charts/gitopsdemo/Chart.yaml"
-        NEW_VALUES_FILE = "charts/gitopsdemo/new_values.yaml"
-        NEW_CHART_FILE = "charts/gitopsdemo/new_chart.yaml"
         TAG = "${SOURCE_BRANCH}-${COMMIT}-${env.BUILD_ID}"
     }
 
     stages
     {
-        stage('cleanup')
-        {
-            steps
-            {
-                script
-                {
-                    sh "if [ -d '.devopsutils' ]; then rm -Rf .devopsutils; fi"
-                }                
-            }
-        }
         stage('get source')
         {
             steps
@@ -36,7 +21,7 @@ pipeline
                 {
                     dir('source')
                     {
-                        git branch: SOURCE_BRANCH, credentialsId: 'idobry_github', url: '$clone_url'
+                        git branch: SOURCE_BRANCH, credentialsId: 'idobry_github', url: SOURCE_URL
                     }                   
                 }
             }
@@ -50,7 +35,7 @@ pipeline
                     dir('source')
                     {
                         sh "echo building image for ${SOURCE_NAME}"
-                        def customImage = docker.build("idobry/gitopsdemo")
+                        def customImage = docker.build("idobry/${SOURCE_NAME}")
                         def tag = "${SOURCE_BRANCH}-${COMMIT}-${env.BUILD_ID}"
                         if(SOURCE_BRANCH == "stage"){
                             TAG = "prod-${COMMIT}-${env.BUILD_ID}"
