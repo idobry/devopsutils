@@ -1,3 +1,4 @@
+---
 apiVersion: flux.weave.works/v1beta1
 kind: HelmRelease
 metadata:
@@ -13,7 +14,7 @@ spec:
     path: charts/gitopsdemo
     ref: master
   values:
-    image: idobry/gitopsdemo:develop-285cbe3-199
+    image: idobry/gitopsdemo:canary-578a3e6-198
     environment: canary
     service:
       nodePort: 30003
