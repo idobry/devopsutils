@@ -4,8 +4,7 @@ metadata:
   name: prod-gitopsdemo
   namespace: prod-gitopsdemo
   annotations:
-    flux.weave.works/automated: "false"
-    flux.weave.works/tag.chart-image: glob:prod-*
+    flux.weave.works/automated: "auto"
 spec:
   releaseName: prod-gitopsdemo
   chart:
