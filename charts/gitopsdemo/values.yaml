@@ -1,5 +1,5 @@
 replicaCount: 1
-environment: stage
+environment: prod
 image: idobry/gitopsdemo:stage-4368178-186
 pullPolicy: Always
 nameOverride: ''
