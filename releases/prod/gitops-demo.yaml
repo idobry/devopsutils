@@ -6,7 +6,7 @@ metadata:
   annotations:
     flux.weave.works/automated: "true"
 spec:
-  releaseName: canary-gitopsdemo
+  releaseName: prod-gitopsdemo
   chart:
     git: git@github.com:idobry/devopsutils.git
     path: charts/gitopsdemo
