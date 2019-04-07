@@ -5,7 +5,7 @@ pullPolicy: Always
 nameOverride: ''
 fullnameOverride: ''
 service:
-  type: ClusterIP
+  type: NodePort
   nodePort: 30000
   port: 80
 ingress:
