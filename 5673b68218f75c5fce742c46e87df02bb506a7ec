@@ -1,0 +1,1 @@
+{"jobID":"4f78cdf9-27be-caea-d6b5-9e50fd1959ed","spec":{"type":"policy","cause":{"Message":"","User":"ido Braunstain \u003cidob@yad2.co.il\u003e"},"spec":{"canary-gitopsdemo:helmrelease/canary-gitopsdemo":{"add":null,"remove":{"automated":"true"}}}},"result":null}
